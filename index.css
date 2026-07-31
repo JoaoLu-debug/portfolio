@@ -246,7 +246,6 @@ body.hovering .custom-cursor-follower {
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.editorial-item.active::after,
 .editorial-item:hover::after {
   transform: scaleX(1);
 }
@@ -261,8 +260,7 @@ body.hovering .custom-cursor-follower {
   white-space: nowrap; /* Prevents wrapping and overlapping */
 }
 
-.editorial-item:hover .item-link,
-.editorial-item.active .item-link {
+.editorial-item:hover .item-link {
   opacity: 1;
 }
 
