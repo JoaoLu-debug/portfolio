@@ -64,10 +64,10 @@ function initIntersectionObserver() {
   if (!container) return;
 
   const colors = [
-    [247, 247, 247], // Hero bg: #f7f7f7
-    [203, 219, 229], // About bg: #cbdbe5
-    [185, 203, 214], // Services bg: #b9cbd6
-    [13, 15, 18]     // Gallery bg: #0d0f12
+    [1, 0, 78],    // Hero bg: #01004e (The exact dark blue from the uploaded image)
+    [6, 12, 98],   // About bg: deep navy
+    [12, 24, 115], // Services bg: navy blue
+    [4, 10, 60]    // Gallery bg: dark navy slate
   ];
 
   // Set initial active states
