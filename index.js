@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroPreviewSwitcher();
   initIntersectionObserver();
   initTiltEffect();
+  initRefractiveCards();
+  initTextPressure();
 });
 
 // 1. Custom Cursor Logic
@@ -118,13 +120,16 @@ function initIntersectionObserver() {
         const sectionName = entry.target.getAttribute('data-section');
         
         // Reset classes
-        container.classList.remove('bg-hero', 'bg-about', 'bg-gallery');
+        container.classList.remove('bg-hero', 'bg-about', 'bg-services', 'bg-gallery');
         document.body.classList.remove('theme-dark', 'theme-porcelain');
 
         // Apply new background state classes to trigger smooth fade in transitions
         if (sectionName === 'gallery') {
           container.classList.add('bg-gallery');
           document.body.classList.add('theme-dark');
+        } else if (sectionName === 'services') {
+          container.classList.add('bg-services');
+          document.body.classList.add('theme-porcelain');
         } else if (sectionName === 'about') {
           container.classList.add('bg-about');
           document.body.classList.add('theme-porcelain');
@@ -180,3 +185,82 @@ window.scrollToSection = function(sectionId) {
     section.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+// 6. Refractive Cards 3D Tilt and Title Parallax (phone-ui-cards)
+function initRefractiveCards() {
+  const musicWrapper = document.getElementById('music-card-wrapper');
+  const musicCard = document.getElementById('music-card');
+  const videoWrapper = document.getElementById('video-card-wrapper');
+  const videoCard = document.getElementById('video-card');
+
+  setupTiltParallax(musicWrapper, musicCard);
+  setupTiltParallax(videoWrapper, videoCard);
+}
+
+function setupTiltParallax(wrapper, card) {
+  if (!wrapper || !card) return;
+  const title = card.querySelector('.pressure-heading');
+
+  wrapper.addEventListener('mousemove', (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const normX = (x / rect.width) - 0.5;
+    const normY = (y / rect.height) - 0.5;
+    
+    card.style.transition = 'transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)';
+    if (title) title.style.transition = 'transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)';
+
+    card.style.transform = `perspective(1000px) rotateX(${normY * -10}deg) rotateY(${normX * 10}deg) scale3d(1.02, 1.02, 1.02)`;
+    if (title) title.style.transform = `translate3d(${normX * -15}px, ${normY * -15}px, 30px)`;
+  });
+
+  wrapper.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    if (title) title.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+    if (title) title.style.transform = 'translate3d(0, 0, 0)';
+  });
+}
+
+// 7. Proximity-based Font Pressure Typography (TextPressure)
+function initTextPressure() {
+  const letters = document.querySelectorAll('.pressure-heading span, #header-logo span');
+  if (letters.length === 0) return;
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  // Track global cursor coordinates for letter distance calculations
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function loop() {
+    letters.forEach(letter => {
+      const rect = letter.getBoundingClientRect();
+      const center = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      };
+      
+      const dx = mouseX - center.x;
+      const dy = mouseY - center.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      const maxDist = 250; // Influence radius in pixels
+      const proximity = Math.max(0, Math.min(1, (maxDist - dist) / maxDist));
+      
+      // Interpolate axis: weight wght 200 -> 900
+      const wght = 200 + (proximity * 700);
+      
+      letter.style.fontVariationSettings = `'wght' ${wght}`;
+    });
+    requestAnimationFrame(loop);
+  }
+  
+  loop();
+}

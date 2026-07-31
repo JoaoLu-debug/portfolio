@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/bbh-sans-bartle/index.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="index.css">
 </head>
@@ -28,7 +28,7 @@
       <span class="mono-label clickable" onclick="scrollToSection('gallery')">TRABALHOS</span>
     </div>
     <div class="header-center">
-      <h1 class="logo-display clickable" onclick="scrollToSection('hero')">PORTFOLIO</h1>
+      <h1 class="logo-display clickable" id="header-logo" onclick="scrollToSection('hero')"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></h1>
     </div>
     <div class="header-right">
       <span class="mono-label clickable" onclick="scrollToSection('about')">( + ) SOBRE MIM</span>
@@ -150,13 +150,85 @@
       </div>
     </section>
 
-    <!-- Section 3: Galeria de Projetos (ROOF Grid Aesthetic) -->
+    <!-- Section 3: Serviços (phone-ui-cards Refractive Grid) -->
+    <section id="services" class="snap-section section-porcelain" data-section="services">
+      <div class="services-container">
+        
+        <!-- Header Grid -->
+        <div class="services-header-grid">
+          <div class="about-number">06</div>
+          <h2 class="about-title">SERVIÇOS / FOCO</h2>
+          <div class="about-line"></div>
+        </div>
+
+        <div class="services-cards-grid">
+          
+          <!-- Card 1: Music Service -->
+          <div class="card-wrapper" id="music-card-wrapper">
+            <article class="refractive-card" id="music-card">
+              <!-- Shifting background fluid blobs -->
+              <div class="card-fluid-bg">
+                <div class="blob blob-blue"></div>
+                <div class="blob blob-white"></div>
+              </div>
+              
+              <!-- Liquid refraction glass layer -->
+              <div class="glass-refraction-layer"></div>
+
+              <div class="card-content">
+                <span class="mono-label">[ ÁUDIO & SOUND DESIGN ]</span>
+                <h3 class="pressure-heading card-heading">
+                  <span>M</span><span>Ú</span><span>S</span><span>I</span><span>C</span><span>A</span>
+                </h3>
+                <p class="card-desc">
+                  Composição de trilhas sonoras originais, sonoplastia imersiva e captação/mixagem profissional para projetos audiovisuais e cinemáticos.
+                </p>
+                <div class="card-footer">
+                  <span class="mono-label clickable" onclick="scrollToSection('gallery')">VER TRABALHOS →</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Card 2: Video Service -->
+          <div class="card-wrapper" id="video-card-wrapper">
+            <article class="refractive-card" id="video-card">
+              <!-- Shifting background fluid blobs -->
+              <div class="card-fluid-bg">
+                <div class="blob blob-indigo"></div>
+                <div class="blob blob-white"></div>
+              </div>
+              
+              <!-- Liquid refraction glass layer -->
+              <div class="glass-refraction-layer"></div>
+
+              <div class="card-content">
+                <span class="mono-label">[ EDIÇÃO & PÓS-PRODUÇÃO ]</span>
+                <h3 class="pressure-heading card-heading">
+                  <span>V</span><span>Í</span><span>D</span><span>E</span><span>O</span>
+                </h3>
+                <p class="card-desc">
+                  Montagem rítmica precisa, correção de cor (color grading) avançada, sound design integrado e motion graphics para vídeos institucionais, artísticos e Reels.
+                </p>
+                <div class="card-footer">
+                  <span class="mono-label clickable" onclick="scrollToSection('gallery')">VER PORTFÓLIO →</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Galeria de Projetos (ROOF Grid Aesthetic) -->
     <section id="gallery" class="snap-section section-dark" data-section="gallery">
       <div class="gallery-container">
         
         <!-- Grid Header -->
         <div class="gallery-header-grid">
-          <div class="about-number text-light">06</div>
+          <div class="about-number text-light">07</div>
           <h2 class="about-title text-light">TRABALHOS / DESTAQUES</h2>
           <div class="about-line bg-light"></div>
         </div>

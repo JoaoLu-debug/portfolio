@@ -771,4 +771,204 @@ body.theme-porcelain .snap-section {
   .custom-cursor, .custom-cursor-follower {
     display: none !important; /* Hide custom cursor on touch devices */
   }
+
+  .services-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .refractive-card {
+    height: 40vh;
+    min-height: 300px;
+  }
 }
+
+/* ==========================================================================
+   REFRACTIVE CARD STYLING & TEXT PRESSURE (phone-ui-cards)
+   ========================================================================== */
+
+/* Variable pressure logo styling */
+.logo-display {
+  display: flex;
+  align-items: center;
+}
+.logo-display span {
+  display: inline-block;
+  font-family: 'Mona Sans', var(--font-display), sans-serif;
+  font-variation-settings: 'wght' 300, 'wdth' 100;
+  pointer-events: none; /* Crucial: stops cursor flickering on letter hover coordinate calculations */
+  transition: font-variation-settings 0.12s ease-out;
+}
+
+/* Scroll background state for services snap */
+.scroll-container.bg-services {
+  background-color: #b9cbd6; /* Slightly deeper elegant blue-gray porcelain for services snap */
+}
+
+.services-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.services-header-grid {
+  display: grid;
+  grid-template-columns: 50px auto 1fr;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 15px;
+}
+
+.services-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Refractive Card styling */
+.refractive-card {
+  position: relative;
+  width: 100%;
+  height: 52vh;
+  min-height: 380px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05),
+              inset 1px 1px 0px rgba(255, 255, 255, 0.6),
+              inset -1px -1px 0px rgba(0, 0, 0, 0.02);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.5s ease;
+}
+
+.refractive-card:hover {
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+}
+
+/* Chromatic border effect (Efeito Prisma) */
+.refractive-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255, 69, 58, 0.12), rgba(10, 132, 255, 0.12), rgba(255, 69, 58, 0.12));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0.7;
+}
+
+/* Liquid refraction glass layer */
+.glass-refraction-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.glass-refraction-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  backdrop-filter: url("#liquid-glass-filter") blur(4px);
+}
+
+/* Ambient glow & blobs inside card */
+.card-fluid-bg {
+  position: absolute;
+  inset: -50px;
+  z-index: 1;
+  overflow: hidden;
+  filter: blur(40px);
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.blob {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  animation: blob-morph 15s infinite alternate ease-in-out;
+}
+
+.blob-blue {
+  background: radial-gradient(circle, rgba(162, 206, 233, 0.6) 0%, rgba(200, 222, 235, 0) 70%);
+  top: -20px;
+  left: -20px;
+}
+
+.blob-indigo {
+  background: radial-gradient(circle, rgba(147, 186, 219, 0.6) 0%, rgba(190, 210, 230, 0) 70%);
+  top: -20px;
+  right: -20px;
+}
+
+.blob-white {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+  bottom: -40px;
+  right: -40px;
+  width: 300px;
+  height: 300px;
+  animation-duration: 20s;
+}
+
+@keyframes blob-morph {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(30px, -30px) scale(1.1) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(360deg); }
+}
+
+/* Card Content Overlay styling */
+.card-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+}
+
+.card-heading {
+  transform: translateZ(30px);
+  margin: 15px 0;
+}
+
+.card-heading span {
+  display: inline-block;
+  font-family: 'Mona Sans', var(--font-display), sans-serif;
+  font-variation-settings: 'wght' 200, 'wdth' 75;
+  transition: font-variation-settings 0.12s ease-out;
+  pointer-events: none;
+}
+
+.card-desc {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted-dark);
+  transform: translateZ(15px);
+  max-width: 90%;
+  margin-bottom: 20px;
+}
+
+.card-footer {
+  transform: translateZ(20px);
+}
+
