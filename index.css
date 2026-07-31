@@ -1150,4 +1150,68 @@ body.theme-porcelain .snap-section {
   }
 }
 
+/* ==========================================================================
+   CHAMP PANUPONG TEXT MOTION DESIGNS (Kinetic Typography)
+   ========================================================================== */
+
+/* 1. Roll-text Hover Animation (Champ Hover signature) */
+.roll-text {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  vertical-align: bottom;
+}
+
+.roll-text-inner {
+  display: block;
+  position: relative;
+  transform: translateY(0);
+  transition: transform 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+}
+
+.roll-text-primary {
+  display: block;
+}
+
+.roll-text-secondary {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+/* Hover triggers */
+.editorial-item:hover .roll-text-inner,
+.project-row:hover .roll-text-inner,
+.roll-text:hover .roll-text-inner {
+  transform: translateY(-100%);
+}
+
+/* 2. Viewport-triggered Staggered Text Slide-up Reveal */
+.reveal-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.reveal-text {
+  display: inline-block;
+  transform: translateY(102%);
+  transition: transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.active-section .reveal-text {
+  transform: translateY(0);
+}
+
+/* Delay modifiers for staggering */
+.reveal-text.delay-1 { transition-delay: 0.08s; }
+.reveal-text.delay-2 { transition-delay: 0.16s; }
+.reveal-text.delay-3 { transition-delay: 0.24s; }
+.reveal-text.delay-4 { transition-delay: 0.32s; }
+.reveal-text.delay-5 { transition-delay: 0.4s; }
+
 
