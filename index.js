@@ -64,7 +64,7 @@ function initIntersectionObserver() {
   if (!container) return;
 
   const colors = [
-    [0, 0, 20],     // Hero bg: ultra dark blue (even darker than image)
+    [1, 0, 50],     // Hero bg: deep midnight blue (matches --bg-white)
     [15, 30, 85],   // About bg: medium-dark navy blue
     [140, 180, 215], // Services bg: soft pastel blue
     [195, 215, 235]  // Gallery bg: very light pastel blue

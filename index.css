@@ -4,7 +4,7 @@
 
 :root {
   /* Color Palette */
-  --bg-white: #01004e; /* Starting deep blue from image */
+  --bg-white: #010032; /* Deep midnight blue, darker than original image but saturated (rgb(1, 0, 50)) */
   --bg-porcelain: #060c62; /* Navy blue */
   --bg-dark: #040a3c; /* Midnight navy */
   
