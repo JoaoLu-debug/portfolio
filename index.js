@@ -100,15 +100,11 @@ function initIntersectionObserver() {
       }
     });
 
-    // 3. Toggle dark/light theme body classes based on scroll position
-    if (position >= 2.5) {
-      document.body.classList.add('theme-dark');
-      document.body.classList.remove('theme-porcelain');
-    } else if (position >= 0.5) {
-      document.body.classList.remove('theme-dark');
-      document.body.classList.add('theme-porcelain');
+    // 3. Toggle light pastel theme based on scroll position (when background becomes light pastel)
+    if (position >= 1.5) {
+      document.body.classList.add('theme-light-pastel');
     } else {
-      document.body.classList.remove('theme-dark', 'theme-porcelain');
+      document.body.classList.remove('theme-light-pastel');
     }
   });
 }

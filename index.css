@@ -24,6 +24,13 @@
   --cursor-color: #ffffff; /* White cursor for dark backgrounds */
 }
 
+body.theme-light-pastel {
+  --text-dark: #0e1013;
+  --text-muted-dark: rgba(14, 16, 19, 0.65);
+  --border-dark: rgba(14, 16, 19, 0.1);
+  --cursor-color: #0e1013;
+}
+
 /* Reset & Core Styles */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -123,16 +130,8 @@ body.hovering .custom-cursor-follower {
   justify-content: center;
   padding: 100px 10% 60px 10%; /* Increased padding for canvas feeling */
   background-color: transparent !important; /* Sections transparent to let container bg show through */
-  transition: color 1s ease;
-}
-
-/* Text color helpers based on theme */
-body.theme-dark .snap-section {
-  color: var(--text-light);
-}
-
-body.theme-porcelain .snap-section {
-  color: var(--text-dark);
+  color: var(--text-dark); /* Default to var(--text-dark) */
+  transition: color 0.5s ease;
 }
 
 /* ==========================================================================
@@ -1198,5 +1197,59 @@ body.theme-porcelain .snap-section {
 .reveal-text.delay-3 { transition-delay: 0.24s; }
 .reveal-text.delay-4 { transition-delay: 0.32s; }
 .reveal-text.delay-5 { transition-delay: 0.4s; }
+
+/* ==========================================================================
+   LIGHT PASTEL THEME CONTRAST & ADAPTATION OVERRIDES
+   ========================================================================== */
+
+/* 1. Header adjustment */
+body.theme-light-pastel .main-header {
+  color: #0e1013;
+  border-bottom-color: rgba(14, 16, 19, 0.1);
+}
+
+/* 2. Text light and background light override (Gallery Section adapt) */
+body.theme-light-pastel .text-light {
+  color: var(--text-dark) !important;
+}
+
+body.theme-light-pastel .bg-light {
+  background-color: var(--border-dark) !important;
+}
+
+/* 3. Projects Table adaptation */
+body.theme-light-pastel .projects-table td {
+  color: rgba(14, 16, 19, 0.75);
+  border-bottom-color: rgba(14, 16, 19, 0.1);
+}
+
+body.theme-light-pastel .projects-table th {
+  color: rgba(14, 16, 19, 0.5);
+  border-bottom-color: rgba(14, 16, 19, 0.15);
+}
+
+body.theme-light-pastel .projects-table .col-project {
+  color: #0e1013;
+}
+
+body.theme-light-pastel .project-row:hover {
+  background-color: rgba(14, 16, 19, 0.02);
+}
+
+/* 4. Service Cards adaptation */
+body.theme-light-pastel .service-card {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(14, 16, 19, 0.08);
+}
+
+body.theme-light-pastel .service-card:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(14, 16, 19, 0.2);
+}
+
+/* 5. Smooth color transitions for all typography */
+body, .snap-section, .main-header, .item-link, .projects-table td, .projects-table th, .projects-table .col-project, .service-card {
+  transition: color 0.5s ease, border-color 0.5s ease, background-color 0.5s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
 
