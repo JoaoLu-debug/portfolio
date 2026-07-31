@@ -210,6 +210,10 @@ body.theme-porcelain .snap-section {
    SECTION 1: HERO (CASEY MENU LAYOUT)
    ========================================================================== */
 
+#hero {
+  padding-left: 4% !important;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
