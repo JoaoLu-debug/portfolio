@@ -75,19 +75,25 @@ function initIntersectionObserver() {
 
   container.addEventListener('scroll', () => {
     const scrollTop = container.scrollTop;
-    const height = window.innerHeight;
+    const height = container.clientHeight;
     const position = scrollTop / height;
     const index = Math.floor(position);
     const factor = position - index; // 0 to 1 progress within the current snap-section
 
     // 1. Interpolate Background Color Dynamically (No Lag, Instant feedback)
-    if (index >= 0 && index < colors.length - 1) {
+    if (position <= 0) {
+      const firstColor = colors[0];
+      container.style.backgroundColor = `rgb(${firstColor[0]}, ${firstColor[1]}, ${firstColor[2]})`;
+    } else if (index >= 0 && index < colors.length - 1) {
       const colorA = colors[index];
       const colorB = colors[index + 1];
       const r = Math.round(colorA[0] + (colorB[0] - colorA[0]) * factor);
       const g = Math.round(colorA[1] + (colorB[1] - colorA[1]) * factor);
       const b = Math.round(colorA[2] + (colorB[2] - colorA[2]) * factor);
       container.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    } else if (index >= colors.length - 1) {
+      const lastColor = colors[colors.length - 1];
+      container.style.backgroundColor = `rgb(${lastColor[0]}, ${lastColor[1]}, ${lastColor[2]})`;
     }
 
     // 2. Mark active section to optimize calculations (TextPressure)
