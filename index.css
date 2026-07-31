@@ -211,7 +211,7 @@ body.theme-porcelain .snap-section {
    ========================================================================== */
 
 #hero {
-  padding-left: 4% !important;
+  padding-left: 0 !important;
 }
 
 .hero-grid {
