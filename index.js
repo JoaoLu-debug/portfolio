@@ -191,15 +191,10 @@ window.scrollToSection = function(sectionId) {
   }
 };
 
-// 6. Refractive Cards 3D Tilt, Title Parallax & Click Interactivity (phone-ui-cards)
+// 6. Service Cards Interactivity Setup
 function initRefractiveCards() {
-  const musicWrapper = document.getElementById('music-card-wrapper');
   const musicCard = document.getElementById('music-card');
-  const videoWrapper = document.getElementById('video-card-wrapper');
   const videoCard = document.getElementById('video-card');
-
-  setupTiltParallax(musicWrapper, musicCard);
-  setupTiltParallax(videoWrapper, videoCard);
 
   // Click on cards opens slide drawers detailing works
   if (musicCard) {
@@ -210,62 +205,55 @@ function initRefractiveCards() {
   }
 }
 
-function setupTiltParallax(wrapper, card) {
-  if (!wrapper || !card) return;
-  const title = card.querySelector('.pressure-heading');
+// 7. High-Performance Proximity-based Typography (No Layout Reflows / Zero Lag)
+let cachedLetterElements = [];
 
-  wrapper.addEventListener('mousemove', (e) => {
-    const rect = wrapper.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const normX = (x / rect.width) - 0.5;
-    const normY = (y / rect.height) - 0.5;
-    
-    card.style.transition = 'transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)';
-    if (title) title.style.transition = 'transform 0.08s cubic-bezier(0.25, 1, 0.5, 1)';
-
-    card.style.transform = `perspective(1000px) rotateX(${normY * -10}deg) rotateY(${normX * 10}deg) scale3d(1.02, 1.02, 1.02)`;
-    if (title) title.style.transform = `translate3d(${normX * -15}px, ${normY * -15}px, 30px)`;
-  });
-
-  wrapper.addEventListener('mouseleave', () => {
-    card.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-    if (title) title.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-
-    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    if (title) title.style.transform = 'translate3d(0, 0, 0)';
+function cacheLetterCoordinates() {
+  cachedLetterElements = [];
+  const activeSpans = document.querySelectorAll('.active-section .pressure-heading span, #header-logo span');
+  activeSpans.forEach(letter => {
+    const rect = letter.getBoundingClientRect();
+    cachedLetterElements.push({
+      el: letter,
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    });
   });
 }
 
-// 7. Optimized Proximity-based Font Pressure Typography (TextPressure)
 function initTextPressure() {
-  let mouseX = 0;
-  let mouseY = 0;
+  // Cache initially
+  cacheLetterCoordinates();
+  
+  // Recache positions on window resize or when scroll container settles
+  window.addEventListener('resize', cacheLetterCoordinates);
+  
+  const container = document.getElementById('scroll-container');
+  if (container) {
+    // Recache coordinates when user scrolls snaps
+    let scrollTimeout;
+    container.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(cacheLetterCoordinates, 150); // Recache once scrolling stops
+    });
+  }
 
-  // Track cursor position globally
+  // Calculate distance using simple math without layout reads on mousemove
   window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    const mx = e.clientX;
+    const my = e.clientY;
     
-    // Only calculate for spans within active snap-section or the header logo to prevent layout thrashing
-    const activeSpans = document.querySelectorAll('.active-section .pressure-heading span, #header-logo span');
-    
-    activeSpans.forEach(letter => {
-      const rect = letter.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      
-      const dx = mouseX - cx;
-      const dy = mouseY - cy;
+    cachedLetterElements.forEach(item => {
+      const dx = mx - item.x;
+      const dy = my - item.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
       
-      const maxDist = 250; // Influence radius in pixels
+      const maxDist = 220; // Proximity threshold
       const proximity = Math.max(0, Math.min(1, (maxDist - dist) / maxDist));
       
-      // Interpolate axis: weight wght 200 -> 900
+      // Variable font settings mapping: weight wght 200 -> 900
       const wght = 200 + (proximity * 700);
-      letter.style.fontVariationSettings = `'wght' ${wght}`;
+      item.el.style.fontVariationSettings = `'wght' ${wght}`;
     });
   });
 }
