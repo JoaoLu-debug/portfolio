@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTiltEffect();
   initRefractiveCards();
   initTextPressure();
+  initTableHoverPreview();
 });
 
 // 1. Custom Cursor Logic
@@ -102,46 +103,59 @@ function initHeroPreviewSwitcher() {
   });
 }
 
-// 3. Intersection Observer for Scroll Snap Sections & Background Change
+// 3. Scroll Color Interpolation & Active Section Management
 function initIntersectionObserver() {
-  const sections = document.querySelectorAll('.snap-section');
   const container = document.getElementById('scroll-container');
-  
+  const sections = document.querySelectorAll('.snap-section');
   if (!container) return;
 
-  const options = {
-    root: container,
-    threshold: 0.5 // Trigger when section is at least 50% in view
-  };
+  const colors = [
+    [247, 247, 247], // Hero bg: #f7f7f7
+    [203, 219, 229], // About bg: #cbdbe5
+    [185, 203, 214], // Services bg: #b9cbd6
+    [13, 15, 18]     // Gallery bg: #0d0f12
+  ];
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const sectionName = entry.target.getAttribute('data-section');
-        
-        // Reset classes
-        container.classList.remove('bg-hero', 'bg-about', 'bg-services', 'bg-gallery');
-        document.body.classList.remove('theme-dark', 'theme-porcelain');
+  // Set initial active states
+  sections[0].classList.add('active-section');
 
-        // Apply new background state classes to trigger smooth fade in transitions
-        if (sectionName === 'gallery') {
-          container.classList.add('bg-gallery');
-          document.body.classList.add('theme-dark');
-        } else if (sectionName === 'services') {
-          container.classList.add('bg-services');
-          document.body.classList.add('theme-porcelain');
-        } else if (sectionName === 'about') {
-          container.classList.add('bg-about');
-          document.body.classList.add('theme-porcelain');
-        } else {
-          container.classList.add('bg-hero');
-        }
+  container.addEventListener('scroll', () => {
+    const scrollTop = container.scrollTop;
+    const height = window.innerHeight;
+    const position = scrollTop / height;
+    const index = Math.floor(position);
+    const factor = position - index; // 0 to 1 progress within the current snap-section
+
+    // 1. Interpolate Background Color Dynamically (No Lag, Instant feedback)
+    if (index >= 0 && index < colors.length - 1) {
+      const colorA = colors[index];
+      const colorB = colors[index + 1];
+      const r = Math.round(colorA[0] + (colorB[0] - colorA[0]) * factor);
+      const g = Math.round(colorA[1] + (colorB[1] - colorA[1]) * factor);
+      const b = Math.round(colorA[2] + (colorB[2] - colorA[2]) * factor);
+      container.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+
+    // 2. Mark active section to optimize calculations (TextPressure)
+    const currentActiveIndex = Math.round(position);
+    sections.forEach((sec, idx) => {
+      if (idx === currentActiveIndex) {
+        sec.classList.add('active-section');
+      } else {
+        sec.classList.remove('active-section');
       }
     });
-  }, options);
 
-  sections.forEach(section => {
-    observer.observe(section);
+    // 3. Toggle dark/light theme body classes based on scroll position
+    if (position >= 2.5) {
+      document.body.classList.add('theme-dark');
+      document.body.classList.remove('theme-porcelain');
+    } else if (position >= 0.5) {
+      document.body.classList.remove('theme-dark');
+      document.body.classList.add('theme-porcelain');
+    } else {
+      document.body.classList.remove('theme-dark', 'theme-porcelain');
+    }
   });
 }
 
@@ -154,25 +168,16 @@ function initTiltEffect() {
       const cardRect = card.getBoundingClientRect();
       const cardWidth = cardRect.width;
       const cardHeight = cardRect.height;
-      
-      // Get mouse position relative to the element (from 0 to cardWidth/cardHeight)
       const mouseX = e.clientX - cardRect.left;
       const mouseY = e.clientY - cardRect.top;
       
-      // Convert to normalized coordinates (-0.5 to 0.5)
       const normX = (mouseX / cardWidth) - 0.5;
       const normY = (mouseY / cardHeight) - 0.5;
       
-      // Calculate rotation angles (Max 12 degrees)
-      const rotateX = -normY * 12;
-      const rotateY = normX * 12;
-      
-      // Apply translation in 3D space
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+      card.style.transform = `perspective(1000px) rotateX(${normY * -12}deg) rotateY(${normX * 12}deg) scale3d(1.03, 1.03, 1.03)`;
     });
 
     card.addEventListener('mouseleave', () => {
-      // Reset transform smoothly
       card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
     });
   });
@@ -186,7 +191,7 @@ window.scrollToSection = function(sectionId) {
   }
 };
 
-// 6. Refractive Cards 3D Tilt and Title Parallax (phone-ui-cards)
+// 6. Refractive Cards 3D Tilt, Title Parallax & Click Interactivity (phone-ui-cards)
 function initRefractiveCards() {
   const musicWrapper = document.getElementById('music-card-wrapper');
   const musicCard = document.getElementById('music-card');
@@ -195,6 +200,14 @@ function initRefractiveCards() {
 
   setupTiltParallax(musicWrapper, musicCard);
   setupTiltParallax(videoWrapper, videoCard);
+
+  // Click on cards opens slide drawers detailing works
+  if (musicCard) {
+    musicCard.addEventListener('click', () => openDrawer('music-drawer'));
+  }
+  if (videoCard) {
+    videoCard.addEventListener('click', () => openDrawer('video-drawer'));
+  }
 }
 
 function setupTiltParallax(wrapper, card) {
@@ -225,30 +238,26 @@ function setupTiltParallax(wrapper, card) {
   });
 }
 
-// 7. Proximity-based Font Pressure Typography (TextPressure)
+// 7. Optimized Proximity-based Font Pressure Typography (TextPressure)
 function initTextPressure() {
-  const letters = document.querySelectorAll('.pressure-heading span, #header-logo span');
-  if (letters.length === 0) return;
-
   let mouseX = 0;
   let mouseY = 0;
 
-  // Track global cursor coordinates for letter distance calculations
+  // Track cursor position globally
   window.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-  });
-
-  function loop() {
-    letters.forEach(letter => {
+    
+    // Only calculate for spans within active snap-section or the header logo to prevent layout thrashing
+    const activeSpans = document.querySelectorAll('.active-section .pressure-heading span, #header-logo span');
+    
+    activeSpans.forEach(letter => {
       const rect = letter.getBoundingClientRect();
-      const center = {
-        x: rect.left + rect.width / 2,
-        y: rect.top + rect.height / 2
-      };
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
       
-      const dx = mouseX - center.x;
-      const dy = mouseY - center.y;
+      const dx = mouseX - cx;
+      const dy = mouseY - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
       
       const maxDist = 250; // Influence radius in pixels
@@ -256,11 +265,55 @@ function initTextPressure() {
       
       // Interpolate axis: weight wght 200 -> 900
       const wght = 200 + (proximity * 700);
-      
       letter.style.fontVariationSettings = `'wght' ${wght}`;
     });
-    requestAnimationFrame(loop);
-  }
-  
-  loop();
+  });
 }
+
+// 8. Drawer Interactivity Binds
+window.openDrawer = function(drawerId) {
+  const drawer = document.getElementById(drawerId);
+  const container = document.getElementById('scroll-container');
+  if (drawer) {
+    drawer.classList.add('open');
+    if (container) container.style.overflowY = 'hidden'; // Stop snap scroll while viewing details
+  }
+};
+
+window.closeDrawer = function(drawerId) {
+  const drawer = document.getElementById(drawerId);
+  const container = document.getElementById('scroll-container');
+  if (drawer) {
+    drawer.classList.remove('open');
+    if (container) container.style.overflowY = 'scroll'; // Re-enable snap scroll
+  }
+};
+
+// 9. Attachment-style Projects Table Hover Preview
+function initTableHoverPreview() {
+  const rows = document.querySelectorAll('.project-row');
+  const preview = document.getElementById('table-hover-preview');
+  const previewImg = document.getElementById('table-preview-img');
+
+  if (!preview || !previewImg) return;
+
+  rows.forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      const imgPath = row.getAttribute('data-preview-img');
+      previewImg.src = imgPath;
+      preview.classList.add('active');
+    });
+
+    row.addEventListener('mousemove', (e) => {
+      // Offset preview element slightly to the top-right of cursor
+      preview.style.left = `${e.clientX + 20}px`;
+      preview.style.top = `${e.clientY - 90}px`;
+    });
+
+    row.addEventListener('mouseleave', () => {
+      preview.classList.remove('active');
+    });
+  });
+}
+
+

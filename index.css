@@ -972,3 +972,267 @@ body.theme-porcelain .snap-section {
   transform: translateZ(20px);
 }
 
+/* ==========================================================================
+   PROJECTS TABLE CATALOG (Aesthetic of Attachment)
+   ========================================================================== */
+
+.projects-table-wrapper {
+  width: 100%;
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.projects-table th {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--text-muted-light);
+  text-transform: uppercase;
+  padding: 15px 10px;
+  border-bottom: 2px solid var(--border-light);
+  user-select: none;
+}
+
+.projects-table td {
+  padding: 22px 10px;
+  border-bottom: 1px solid var(--border-light);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.projects-table .col-project {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-light);
+}
+
+.project-row {
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.project-row:hover td {
+  color: var(--text-light);
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.project-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Floating Table Hover Preview */
+.table-hover-preview {
+  position: fixed;
+  width: 120px;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.table-hover-preview.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.table-hover-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   SLIDING GLASS DETAILED DRAWERS (phone-ui-cards)
+   ========================================================================== */
+
+.detail-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 500px;
+  max-width: 100%;
+  height: 100vh;
+  background: rgba(203, 219, 229, 0.82); /* Porcelain Blue Glass */
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  z-index: 10000;
+  transform: translateX(100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(25px) saturate(110%);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.08);
+}
+
+.detail-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  height: 80px;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(14, 16, 19, 0.08);
+  border-top: 1px solid transparent;
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  scrollbar-width: none;
+}
+.drawer-body::-webkit-scrollbar {
+  display: none;
+}
+
+.drawer-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--text-dark);
+}
+
+.drawer-intro {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  font-weight: 400;
+}
+
+.drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 1px solid rgba(14, 16, 19, 0.08);
+  padding-top: 25px;
+}
+
+.section-tag {
+  color: var(--text-muted-dark);
+}
+
+.drawer-text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-muted-dark);
+}
+
+/* Tracklist specific styles */
+.tracklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-item {
+  display: grid;
+  grid-template-columns: 35px 1fr 50px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(14, 16, 19, 0.05);
+  align-items: center;
+}
+
+.track-number {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted-dark);
+}
+
+.track-info h5 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 3px;
+}
+
+.track-info p {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted-dark);
+}
+
+.track-duration {
+  text-align: right;
+  color: var(--text-muted-dark);
+}
+
+/* Video process step specific styles */
+.video-process-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.process-step {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.process-step h5 {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.process-step p {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted-dark);
+}
+
+@media (max-width: 768px) {
+  .detail-drawer {
+    width: 100%;
+  }
+  .drawer-header {
+    padding: 0 20px;
+  }
+  .drawer-body {
+    padding: 20px;
+  }
+  .projects-table th {
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+  }
+  .projects-table td {
+    font-size: 0.7rem;
+    padding: 15px 5px;
+  }
+  .projects-table .col-project {
+    font-size: 0.75rem;
+  }
+}
+
+
