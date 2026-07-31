@@ -4,7 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initCursor();
-  initHeroPreviewSwitcher();
   initIntersectionObserver();
   initTiltEffect();
   initRefractiveCards();
@@ -56,52 +55,7 @@ function initCursor() {
   });
 }
 
-// 2. Hero Editorial Menu Preview Switcher
-function initHeroPreviewSwitcher() {
-  const items = document.querySelectorAll('.editorial-item');
-  const previewImg = document.getElementById('preview-img');
-  const previewMeta = document.getElementById('preview-meta');
-  const previewTitle = document.getElementById('preview-title');
-  const previewDesc = document.getElementById('preview-desc');
-  const previewCard = document.getElementById('preview-card');
 
-  if (!previewImg || !previewMeta || !previewTitle || !previewDesc) return;
-
-  items.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-      // 1. Remove active class from others
-      items.forEach(i => i.classList.remove('active'));
-      
-      // 2. Set current active
-      item.classList.add('active');
-
-      // 3. Extract metadata
-      const imgPath = item.getAttribute('data-img');
-      const title = item.getAttribute('data-title');
-      const meta = item.getAttribute('data-meta');
-      const desc = item.getAttribute('data-desc');
-
-      // 4. Smooth Fade-Out / Swap / Fade-In Transition
-      // We fade out the image and text opacity, swap values, then fade back in.
-      previewImg.style.opacity = '0';
-      previewMeta.classList.add('fade-out');
-      previewTitle.style.opacity = '0';
-      previewDesc.style.opacity = '0';
-
-      setTimeout(() => {
-        previewImg.src = imgPath;
-        previewMeta.innerText = meta;
-        previewTitle.innerText = title;
-        previewDesc.innerText = desc;
-
-        previewImg.style.opacity = '1';
-        previewMeta.classList.remove('fade-out');
-        previewTitle.style.opacity = '1';
-        previewDesc.style.opacity = '1';
-      }, 300); // Duration corresponds to CSS transitions
-    });
-  });
-}
 
 // 3. Scroll Color Interpolation & Active Section Management
 function initIntersectionObserver() {

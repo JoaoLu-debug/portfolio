@@ -213,11 +213,10 @@ body.theme-porcelain .snap-section {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
+  grid-template-columns: 1fr;
   align-items: center;
   width: 100%;
   height: 100%;
-  gap: 40px;
   margin-top: 20px;
 }
 
@@ -225,69 +224,33 @@ body.theme-porcelain .snap-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
 }
 
 .editorial-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
 }
 
 .editorial-item {
   position: relative;
   display: flex;
   align-items: flex-start;
-  padding-bottom: 8px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border-dark);
-  transition: border-color 0.4s ease;
-}
-
-.editorial-item::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: var(--text-dark);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.editorial-item.active::after,
-.editorial-item:hover::after {
-  transform: scaleX(1);
-}
-
-.editorial-item.active .item-link {
-  opacity: 1;
-}
-
-.item-number {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-right: 20px;
-  margin-top: 15px;
-  opacity: 0.8;
 }
 
 .item-link {
   text-decoration: none;
   color: var(--text-dark);
-  opacity: 0.45;
-  transition: opacity 0.4s ease;
-  line-height: 1.1;
+  opacity: 1; /* Always solid */
+  line-height: 1.05;
   display: inline-block;
 }
 
-.editorial-item:hover .item-link {
-  opacity: 1;
-}
-
-/* Typographic Mix Matching CASEY style */
+/* Typographic Mix Matching CASEY style (Luxury Large Canvas) */
 .font-display {
   font-family: var(--font-display);
 }
@@ -296,27 +259,27 @@ body.theme-porcelain .snap-section {
 }
 
 .editorial-item:nth-child(1) .item-link {
-  font-size: 2.6vw; /* Smaller */
+  font-size: 6.5vw;
   font-weight: 800;
-  letter-spacing: 4px; /* More spaced out */
+  letter-spacing: 2px;
 }
 
 .editorial-item:nth-child(2) .item-link {
-  font-size: 2.8vw; /* Smaller */
+  font-size: 7vw;
   font-weight: 300;
-  letter-spacing: 2px; /* More spaced out */
+  letter-spacing: 1px;
 }
 
 .editorial-item:nth-child(3) .item-link {
-  font-size: 2.4vw; /* Smaller */
+  font-size: 6vw;
   font-weight: 700;
-  letter-spacing: 3px; /* More spaced out */
+  letter-spacing: 2px;
 }
 
 .editorial-item:nth-child(4) .item-link {
-  font-size: 2.6vw; /* Smaller */
+  font-size: 6.5vw;
   font-weight: 500;
-  letter-spacing: 4px; /* More spaced out */
+  letter-spacing: 2px;
 }
 
 .uppercase {
