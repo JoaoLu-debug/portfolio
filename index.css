@@ -738,110 +738,7 @@ body.hovering .custom-cursor-follower {
   }
 }
 
-@media (max-width: 768px) {
-  .main-header {
-    height: 60px;
-    padding: 0 4%;
-  }
-
-  /* Hide the redundant "PORTFOLIO ( 2026 )" label and the divider on mobile header */
-  .main-header .header-left .mono-label:first-child,
-  .main-header .header-left .divider {
-    display: none !important;
-  }
-
-  .logo-display {
-    font-size: 0.95rem !important;
-    letter-spacing: 3px !important;
-  }
-
-  .header-left, .header-right {
-    gap: 8px;
-  }
-
-  .mono-label {
-    font-size: 0.58rem !important;
-    letter-spacing: 1.5px !important;
-  }
-
-  .snap-section {
-    padding: 90px 6% 30px 6%;
-  }
-
-  .editorial-item:nth-child(1) .item-link { font-size: 5.5vw; letter-spacing: 2px; }
-  .editorial-item:nth-child(2) .item-link { font-size: 6vw; letter-spacing: 1px; }
-  .editorial-item:nth-child(3) .item-link { font-size: 5.2vw; letter-spacing: 2px; }
-  .editorial-item:nth-child(4) .item-link { font-size: 5.5vw; letter-spacing: 2px; }
-  
-  .item-number {
-    font-size: 0.65rem;
-    margin-right: 10px;
-    margin-top: 8px;
-  }
-
-  .about-title {
-    font-size: 1.1rem;
-    letter-spacing: 4px;
-  }
-
-  .about-intro {
-    font-size: 1.3rem;
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .custom-cursor, .custom-cursor-follower {
-    display: none !important; /* Hide custom cursor on touch devices */
-  }
-
-  .services-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  /* Prevent service cards text overflow on mobile */
-  .service-card {
-    height: auto !important;
-    min-height: 320px;
-  }
-  
-  .card-content {
-    padding: 24px !important;
-  }
-  
-  .card-desc {
-    font-size: 0.78rem !important;
-    max-width: 100% !important;
-    margin-bottom: 15px !important;
-  }
-
-  /* Projects Table Mobile Alignment & Safety */
-  .col-location {
-    display: none !important;
-  }
-  
-  .projects-table th.col-project, .projects-table td.col-project { width: 50%; }
-  .projects-table th.col-category, .projects-table td.col-category { width: 35%; }
-  .projects-table th.col-year, .projects-table td.col-year { width: 15%; }
-  
-  .projects-table th {
-    font-size: 0.55rem;
-    letter-spacing: 1px;
-    padding: 12px 5px !important;
-  }
-  
-  .projects-table td {
-    font-size: 0.72rem !important;
-    padding: 16px 5px !important;
-  }
-  
-  .projects-table .col-project {
-    font-size: 0.8rem !important;
-  }
-}
+/* Media query block removed from here and moved to the end of the file to preserve cascading overrides */
 
 /* ==========================================================================
    REFRACTIVE CARD STYLING & TEXT PRESSURE (phone-ui-cards)
@@ -1204,28 +1101,7 @@ body.hovering .custom-cursor-follower {
   color: rgba(255, 255, 255, 0.7);
 }
 
-@media (max-width: 768px) {
-  .detail-drawer {
-    width: 100%;
-  }
-  .drawer-header {
-    padding: 0 20px;
-  }
-  .drawer-body {
-    padding: 20px;
-  }
-  .projects-table th {
-    font-size: 0.55rem;
-    letter-spacing: 1px;
-  }
-  .projects-table td {
-    font-size: 0.7rem;
-    padding: 15px 5px;
-  }
-  .projects-table .col-project {
-    font-size: 0.75rem;
-  }
-}
+/* Secondary projects table media query removed and consolidated at the end of the file */
 
 /* ==========================================================================
    CHAMP PANUPONG TEXT MOTION DESIGNS (Kinetic Typography)
@@ -1347,6 +1223,130 @@ body.theme-light-pastel .service-card:hover {
 /* 5. Smooth color transitions for all typography */
 body, .snap-section, .main-header, .item-link, .projects-table td, .projects-table th, .projects-table .col-project, .service-card {
   transition: color 0.5s ease, border-color 0.5s ease, background-color 0.5s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESPONSIVE STYLE OVERRIDES (Consolidated at the end of file for cascading)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .main-header {
+    height: 60px;
+    padding: 0 4%;
+  }
+
+  /* Hide the redundant "PORTFOLIO ( 2026 )" label and the divider on tablet and mobile viewports (both portrait & landscape) */
+  .main-header .header-left .mono-label:first-child,
+  .main-header .header-left .divider {
+    display: none !important;
+  }
+
+  .logo-display {
+    font-size: 0.95rem !important;
+    letter-spacing: 3px !important;
+  }
+
+  .header-left, .header-right {
+    gap: 8px;
+  }
+
+  .mono-label {
+    font-size: 0.58rem !important;
+    letter-spacing: 1.5px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .snap-section {
+    padding: 90px 6% 30px 6%;
+  }
+
+  .editorial-item:nth-child(1) .item-link { font-size: 5.5vw; letter-spacing: 2px; }
+  .editorial-item:nth-child(2) .item-link { font-size: 6vw; letter-spacing: 1px; }
+  .editorial-item:nth-child(3) .item-link { font-size: 5.2vw; letter-spacing: 2px; }
+  .editorial-item:nth-child(4) .item-link { font-size: 5.5vw; letter-spacing: 2px; }
+  
+  .item-number {
+    font-size: 0.65rem;
+    margin-right: 10px;
+    margin-top: 8px;
+  }
+
+  .about-title {
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+  }
+
+  .about-intro {
+    font-size: 1.3rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .custom-cursor, .custom-cursor-follower {
+    display: none !important;
+  }
+
+  /* Stacking the services cards vertically on mobile with full width */
+  .services-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+    width: 100% !important;
+  }
+  
+  /* Prevent service cards text overflow on mobile */
+  .service-card {
+    height: auto !important;
+    min-height: 320px !important;
+    width: 100% !important;
+  }
+  
+  .card-content {
+    padding: 24px !important;
+  }
+  
+  .card-desc {
+    font-size: 0.78rem !important;
+    max-width: 100% !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* Projects Table Mobile Alignment & Safety */
+  .col-location {
+    display: none !important;
+  }
+  
+  .projects-table th.col-project, .projects-table td.col-project { width: 50% !important; }
+  .projects-table th.col-category, .projects-table td.col-category { width: 35% !important; }
+  .projects-table th.col-year, .projects-table td.col-year { width: 15% !important; }
+  
+  .projects-table th {
+    font-size: 0.55rem !important;
+    letter-spacing: 1px !important;
+    padding: 12px 5px !important;
+  }
+  
+  .projects-table td {
+    font-size: 0.72rem !important;
+    padding: 16px 5px !important;
+  }
+  
+  .projects-table .col-project {
+    font-size: 0.8rem !important;
+  }
+  
+  .detail-drawer {
+    width: 100% !important;
+  }
+  .drawer-header {
+    padding: 0 20px !important;
+  }
+  .drawer-body {
+    padding: 20px !important;
+  }
 }
 
 
