@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Editorial & Creative Works</title>
+  <meta name="description" content="Portfolio de criação musical, desenvolvimento de sites, edição de vídeo e edição de imagens de alto padrão.">
+  
+  <!-- Google Fonts: Syne for heavy sans, Cormorant Garamond for elegant serif, Space Mono for details -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  
+  <!-- Custom Sleek Magnetic Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+
+  <!-- Header Navigation (Casey-style) -->
+  <header class="main-header">
+    <div class="header-left">
+      <span class="mono-label">PORTFOLIO ( 2026 )</span>
+      <span class="divider">/</span>
+      <span class="mono-label clickable" onclick="scrollToSection('gallery')">TRABALHOS</span>
+    </div>
+    <div class="header-center">
+      <h1 class="logo-script clickable" onclick="scrollToSection('hero')">Portfolio</h1>
+    </div>
+    <div class="header-right">
+      <span class="mono-label clickable" onclick="scrollToSection('about')">( + ) SOBRE MIM</span>
+    </div>
+  </header>
+
+  <!-- Main Viewport Container with Scroll Snap -->
+  <main class="scroll-container" id="scroll-container">
+    
+    <!-- Section 1: Hero (Casey Aesthetic) -->
+    <section id="hero" class="snap-section section-white" data-section="hero">
+      <div class="hero-grid">
+        
+        <!-- Left Side: Editorial Navigation List -->
+        <div class="hero-nav-col">
+          <ul class="editorial-list">
+            
+            <li class="editorial-item active" data-index="0" data-img="images/music.jpg" data-title="PRODUÇÃO MUSICAL" data-meta="[ DESIGN DE SOM ]" data-desc="Composição de trilhas sonoras e atmosferas sonoras exclusivas para marcas e cinema.">
+              <span class="item-number">01</span>
+              <a href="#music" class="item-link font-syne uppercase">música</a>
+            </li>
+            
+            <li class="editorial-item" data-index="1" data-img="images/sites.jpg" data-title="DESENVOLVIMENTO WEB" data-meta="[ FRONT-END LUXO ]" data-desc="Criação de websites interativos premium com layouts esculturais e micro-animações fluidas.">
+              <span class="item-number">02</span>
+              <a href="#sites" class="item-link font-serif italic">sites</a>
+            </li>
+            
+            <li class="editorial-item" data-index="2" data-img="images/video.jpg" data-title="EDIÇÃO DE VÍDEO" data-meta="[ POST-PRODUÇÃO ]" data-desc="Montagem rítmica, correção de cor cinematográfica e efeitos visuais integrados.">
+              <span class="item-number">03</span>
+              <a href="#video" class="item-link font-syne lowercase">edições de video</a>
+            </li>
+            
+            <li class="editorial-item" data-index="3" data-img="images/images.jpg" data-title="DIREÇÃO DE ARTE & IMAGEM" data-meta="[ FOTOMONTAGEM ]" data-desc="Tratamento de imagem avançado, retoques de alta costura e composições surreais exclusivas.">
+              <span class="item-number">04</span>
+              <a href="#images" class="item-link font-serif italic uppercase">edições de imagens</a>
+            </li>
+            
+          </ul>
+        </div>
+        
+        <!-- Right Side: Vertical Dynamic Preview Widget -->
+        <div class="hero-preview-col">
+          <div class="preview-card-wrapper">
+            <div class="preview-card" id="preview-card">
+              <div class="preview-image-container">
+                <img id="preview-img" src="images/music.jpg" alt="Preview de Trabalhos" class="preview-img">
+              </div>
+              <div class="preview-metadata">
+                <span class="mono-label meta-tag" id="preview-meta">[ DESIGN DE SOM ]</span>
+                <h3 class="preview-title" id="preview-title">PRODUÇÃO MUSICAL</h3>
+                <p class="preview-desc" id="preview-desc">Composição de trilhas sonoras e atmosferas sonoras exclusivas para marcas e cinema.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Hint -->
+      <div class="scroll-hint">
+        <span class="mono-label">DESÇA PARA EXPLORAR</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Section 2: Sobre Mim (ROOF Architectural Aesthetic) -->
+    <section id="about" class="snap-section section-porcelain" data-section="about">
+      <div class="about-container">
+        
+        <!-- Architectural Grid Header -->
+        <div class="about-header-grid">
+          <div class="about-number">05</div>
+          <h2 class="about-title">SOBRE / MIM</h2>
+          <div class="about-line"></div>
+        </div>
+
+        <div class="about-content-grid">
+          <!-- Left Main Column: Large Bio Intro -->
+          <div class="about-bio-col">
+            <p class="about-intro">
+              Unindo a pulsação do som, a narrativa do vídeo e a precisão do código para esculpir experiências digitais memoráveis.
+            </p>
+            <p class="about-details">
+              Como criador multidisciplinar, transito entre a produção musical e o design digital com uma abordagem focada em minimalismo, luxo e impacto estético. Acredito que um site, uma edição de vídeo ou uma trilha sonora devem respirar e ter estrutura, assim como uma grande obra arquitetônica.
+            </p>
+          </div>
+
+          <!-- Right Column: Detail Information & Skills -->
+          <div class="about-skills-col">
+            <div class="skills-block">
+              <span class="mono-label">DIRETRIZES CREATIVAS</span>
+              <div class="skills-list">
+                <div class="skill-item">
+                  <span class="skill-num">I.</span>
+                  <div class="skill-info">
+                    <h4>MÚSICA & DESIGN SONORO</h4>
+                    <p>Produção de trilhas originais e sound design customizado que geram conexões emocionais profundas.</p>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-num">II.</span>
+                  <div class="skill-info">
+                    <h4>EDIÇÃO E NARRATIVA</h4>
+                    <p>Pós-produção de vídeo cinematográfica com foco em ritmo visual e correção de cores primorosa.</p>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <span class="skill-num">III.</span>
+                  <div class="skill-info">
+                    <h4>ENGENHARIA INTERATIVA</h4>
+                    <p>Sites codificados com atenção obsessiva aos detalhes, micro-interações e layouts responsivos.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 3: Galeria de Projetos (ROOF Grid Aesthetic) -->
+    <section id="gallery" class="snap-section section-dark" data-section="gallery">
+      <div class="gallery-container">
+        
+        <!-- Grid Header -->
+        <div class="gallery-header-grid">
+          <div class="about-number text-light">06</div>
+          <h2 class="about-title text-light">TRABALHOS / DESTAQUES</h2>
+          <div class="about-line bg-light"></div>
+        </div>
+
+        <!-- Sibling Dimming Project Grid -->
+        <div class="project-grid" id="project-grid">
+          
+          <!-- Card 1: Music Project -->
+          <div class="project-card" data-tilt>
+            <div class="project-image-box">
+              <img src="images/music.jpg" alt="Projeto de Música" class="project-img">
+              <div class="project-overlay">
+                <span class="mono-label">EXPLORAR TRILHA</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-line">
+                <span class="project-category">AUDIO PRODUCTION</span>
+                <span class="project-year">2026</span>
+              </div>
+              <h3 class="project-card-title">MODULAR ATMOSPHERES</h3>
+            </div>
+          </div>
+
+          <!-- Card 2: Sites Project -->
+          <div class="project-card" data-tilt>
+            <div class="project-image-box">
+              <img src="images/sites.jpg" alt="Projeto de Sites" class="project-img">
+              <div class="project-overlay">
+                <span class="mono-label">VER PROJETO</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-line">
+                <span class="project-category">WEB DEVELOPMENT</span>
+                <span class="project-year">2026</span>
+              </div>
+              <h3 class="project-card-title">ROOF ARCHITECTURE LANDING</h3>
+            </div>
+          </div>
+
+          <!-- Card 3: Video Project -->
+          <div class="project-card" data-tilt>
+            <div class="project-image-box">
+              <img src="images/video.jpg" alt="Projeto de Vídeo" class="project-img">
+              <div class="project-overlay">
+                <span class="mono-label">ASSISTIR REEL</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-line">
+                <span class="project-category">VIDEO EDITING</span>
+                <span class="project-year">2026</span>
+              </div>
+              <h3 class="project-card-title">CINEMATIC MONTAGE 4K</h3>
+            </div>
+          </div>
+
+          <!-- Card 4: Image Project -->
+          <div class="project-card" data-tilt>
+            <div class="project-image-box">
+              <img src="images/images.jpg" alt="Projeto de Imagem" class="project-img">
+              <div class="project-overlay">
+                <span class="mono-label">GALERIA</span>
+              </div>
+            </div>
+            <div class="project-info">
+              <div class="project-meta-line">
+                <span class="project-category">ART DIRECTION</span>
+                <span class="project-year">2026</span>
+              </div>
+              <h3 class="project-card-title">SURREAL SURFACES</h3>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Refractive Glass SVG Filter Setup (Hidden) -->
+  <svg aria-hidden="true" class="hidden-svg" focusable="false">
+    <defs>
+      <filter color-interpolation-filters="sRGB" height="200%" id="liquid-glass-filter" width="200%" x="-50%" y="-50%">
+        <feTurbulence baseFrequency="0.04 0.04" numOctaves="1" result="turbulence" seed="1" type="fractalNoise" />
+        <feGaussianBlur in="turbulence" result="blurredNoise" stdDeviation="1.5" />
+        <feDisplacementMap in="SourceGraphic" in2="blurredNoise" result="displaced" scale="15" xChannelSelector="R" yChannelSelector="B" />
+        <feGaussianBlur in="displaced" result="finalBlur" stdDeviation="1" />
+        <feComposite in="finalBlur" in2="finalBlur" operator="over" />
+      </filter>
+    </defs>
+  </svg>
+
+  <script src="index.js"></script>
+</body>
+</html>
