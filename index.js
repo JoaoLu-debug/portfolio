@@ -103,9 +103,12 @@ function initHeroPreviewSwitcher() {
 // 3. Intersection Observer for Scroll Snap Sections & Background Change
 function initIntersectionObserver() {
   const sections = document.querySelectorAll('.snap-section');
+  const container = document.getElementById('scroll-container');
   
+  if (!container) return;
+
   const options = {
-    root: document.getElementById('scroll-container'),
+    root: container,
     threshold: 0.5 // Trigger when section is at least 50% in view
   };
 
@@ -114,16 +117,19 @@ function initIntersectionObserver() {
       if (entry.isIntersecting) {
         const sectionName = entry.target.getAttribute('data-section');
         
-        // Dynamic Class Styling on Body based on Section
+        // Reset classes
+        container.classList.remove('bg-hero', 'bg-about', 'bg-gallery');
+        document.body.classList.remove('theme-dark', 'theme-porcelain');
+
+        // Apply new background state classes to trigger smooth fade in transitions
         if (sectionName === 'gallery') {
+          container.classList.add('bg-gallery');
           document.body.classList.add('theme-dark');
-          document.body.classList.remove('theme-porcelain');
         } else if (sectionName === 'about') {
+          container.classList.add('bg-about');
           document.body.classList.add('theme-porcelain');
-          document.body.classList.remove('theme-dark');
         } else {
-          // Hero section
-          document.body.classList.remove('theme-dark', 'theme-porcelain');
+          container.classList.add('bg-hero');
         }
       }
     });
