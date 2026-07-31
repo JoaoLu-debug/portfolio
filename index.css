@@ -539,6 +539,11 @@ body.hovering .custom-cursor-follower {
    SECTION 3: GALERIA DE TRABALHOS (ROOF GRID & VISUAL EFFECTS)
    ========================================================================== */
 
+#gallery.snap-section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .gallery-container {
   width: 100%;
   max-width: 1200px;
@@ -546,6 +551,12 @@ body.hovering .custom-cursor-follower {
   display: flex;
   flex-direction: column;
   gap: 40px;
+}
+
+#gallery .gallery-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 .gallery-header-grid {
@@ -909,6 +920,16 @@ body.hovering .custom-cursor-follower {
   color: var(--text-light);
 }
 
+.projects-table th:first-child,
+.projects-table td:first-child {
+  padding-left: 0 !important;
+}
+
+.projects-table th:last-child,
+.projects-table td:last-child {
+  padding-right: 20px !important;
+}
+
 .project-row {
   transition: background-color 0.3s ease;
   position: relative;
@@ -1231,7 +1252,11 @@ body.theme-light-pastel .projects-table .col-project {
 }
 
 body.theme-light-pastel .project-row:hover {
-  background-color: rgba(14, 16, 19, 0.02);
+  background-color: #0e1013 !important;
+}
+
+body.theme-light-pastel .project-row:hover td {
+  color: #ffffff !important;
 }
 
 /* 4. Service Cards adaptation */
