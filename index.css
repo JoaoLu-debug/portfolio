@@ -477,83 +477,55 @@ body.hovering .custom-cursor-follower {
 
 .about-content-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 80px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  width: 100%;
 }
 
-.about-bio-col {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.about-intro {
-  font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: 1.6rem; /* Smaller */
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  color: var(--text-dark);
-}
-
-.about-details {
-  font-family: var(--font-sans);
-  font-size: 0.85rem; /* Smaller */
-  line-height: 1.8;
-  letter-spacing: 0.3px;
-  color: var(--text-muted-dark);
-}
-
-/* Skills Column with Structural List */
-.about-skills-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.skills-block {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.skills-list {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--border-dark);
-}
-
-.skill-item {
+/* Metadata Canvas Grid (Canva Spacing Reference) */
+.metadata-canvas-grid {
   display: grid;
-  grid-template-columns: 40px 1fr;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border-dark);
-  transition: background-color 0.3s ease;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  gap: 40px;
+  margin-top: 60px;
 }
 
-.skill-item:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+.metadata-canvas-col {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Spacing between header and items exactly like Canva */
 }
 
-.skill-num {
+.metadata-canvas-title {
   font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 700;
-  opacity: 0.5;
+  font-size: 0.95rem; /* Large scale header in metadata */
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-dark);
+  margin: 0;
+  opacity: 0.9;
 }
 
-.skill-info h4 {
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 800;
-  margin-bottom: 5px;
-  letter-spacing: 1.5px;
+.metadata-canvas-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Spaced out items exactly like reference */
 }
 
-.skill-info p {
+.metadata-canvas-list li {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
-  line-height: 1.6;
-  color: var(--text-muted-dark);
+  font-size: 0.72rem; /* Compact, very sharp */
+  font-weight: 700; /* Bold/medium uppercase as in reference */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  color: var(--text-dark);
+  opacity: 0.85;
 }
 
 /* ==========================================================================
@@ -729,12 +701,25 @@ body.hovering .custom-cursor-follower {
   }
 
   .about-content-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .metadata-canvas-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
   
   .project-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-content-grid,
+  .metadata-canvas-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 
@@ -861,31 +846,36 @@ body.hovering .custom-cursor-follower {
 }
 
 .projects-table th {
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 2px;
+  font-family: var(--font-sans) !important;
+  font-size: 0.95rem !important; /* Match metadata title size */
+  font-weight: 300 !important;
+  letter-spacing: 2px !important;
   color: var(--text-muted-light);
-  text-transform: uppercase;
-  padding: 15px 10px;
+  text-transform: uppercase !important;
+  padding: 20px 10px !important;
   border-bottom: 2px solid var(--border-light);
   user-select: none;
 }
 
 .projects-table td {
-  padding: 22px 10px;
+  padding: 20px 10px !important;
   border-bottom: 1px solid var(--border-light);
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important; /* Match metadata item size */
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  line-height: 1.4 !important;
   color: rgba(255, 255, 255, 0.7);
   transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .projects-table .col-project {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  font-family: var(--font-sans) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
   color: var(--text-light);
 }
 
